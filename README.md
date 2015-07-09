@@ -4,7 +4,9 @@
 
 [Restify](http://mcavage.me/node-restify/) middleware that validates JsonWebTokens and sets `req.user`.
 
-This module lets you authenticate HTTP requests using JWT tokens in your restify applications.
+This module lets you authenticate HTTP requests using JWT tokens in your Node.js
+applications.  JWTs are typically used to protect API endpoints, and are
+often issued using OpenID Connect.
 
 ## Install
 
@@ -45,7 +47,9 @@ Optionally you can make some paths unprotected as follows:
 app.use(jwt({ secret: 'shhhhhhared-secret'}).unless({path: ['/token']}));
 ```
 
-This is especially useful when applying to multiple routes.
+This is especially useful when applying to multiple routes. In the example above, `path` can be a string, a regexp, or an array of any of those.
+
+> For more details on the `.unless` syntax including additional options, please see [express-unless](https://github.com/jfromaniello/express-unless).
 
 This module also support tokens signed with public/private key pairs. Instead of a secret, you can specify a Buffer with the public key
 
@@ -92,7 +96,7 @@ For example, if the secret varies based on the [JWT issuer](http://self-issued.i
 ```javascript
 var jwt = require('restify-jwt');
 var data = require('./data');
-var utilities = requre('./utilities');
+var utilities = require('./utilities');
 
 var secretCallback = function(req, payload, done){
   var issuer = payload.iss;
@@ -120,13 +124,13 @@ It is possible that some tokens will need to be revoked so they cannot be used a
 * `payload` (`Object`) - An object with the JWT claims.
 * `done` (`Function`) - A function with signature `function(err, revoked)` to be invoked once the check to see if the token is revoked or not is complete.
   * `err` (`Any`) - The error that occurred.
-  * `secret` (`Boolean`) - `true` if the JWT is revoked, `false` otherwise.
+  * `revoked` (`Boolean`) - `true` if the JWT is revoked, `false` otherwise.
 
 For example, if the `(iss, jti)` claim pair is used to identify a JWT:
 ```javascript
 var jwt = require('restify-jwt');
 var data = require('./data');
-var utilities = requre('./utilities');
+var utilities = require('./utilities');
 
 var isRevokedCallback = function(req, payload, done){
   var issuer = payload.iss;
@@ -167,6 +171,14 @@ can do it using the option _credentialsRequired_:
       secret: 'hello world !',
       credentialsRequired: false
     }));
+
+## Related Modules
+
+- [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken) — JSON Web Token sign and verification
+
+## Issue Reporting
+
+If you have found a bug or if you have a feature request, please report them at this repository issues section. Please do not report security vulnerabilities on the public GitHub issue tracker. The [Responsible Disclosure Program](https://auth0.com/whitehat) details the procedure for disclosing security issues.
 
 ## Tests
 
