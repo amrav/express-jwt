@@ -254,7 +254,7 @@ describe('work tests', function () {
 
     req.headers = {};
     req.headers.authorization = 'Bearer ' + token;
-    expressjwt({secret: secretCallback})(req, res, function() {
+    restifyjwt({secret: secretCallback})(req, res, function() {
       assert.equal('bar', req.user.foo);
     });
   });
