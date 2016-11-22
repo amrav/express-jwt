@@ -157,6 +157,13 @@ app.get('/protected',
   });
 ```
 
+### Loading Extra Data
+Rather than putting any or all session-related data into the JWT, you can provide a function that as the `enhancedLoadCallback` option that will
+be used to extend or update the decoded JWT data that gets added to the request object by the restify-jwt middleware.
+The signature of the function is `function(decoded, callback)`:
+* `decoded` (`Object`) - The decoded JWT key/value pairs
+* `callback` (`Function`) - The restify-jwt function that updates the request object on success and calls next middleware, or errors on failure
+
 ### Error handling
 
 The default behavior is to throw an error when the token is invalid, so you can add your custom logic to manage unauthorized access as follows:
