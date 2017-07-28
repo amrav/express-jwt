@@ -35,16 +35,15 @@
   "dependencies": {
     "async": "^0.9.0",
     "express-unless": "^0.3.0",
-    "jsonwebtoken": "^5.0.0",
-    "restify-errors": "^4.3.0"
+    "jsonwebtoken": "^5.0.0"
   },
   "devDependencies": {
     "mocha": "1.x.x",
     "restify": "3.x"
   },
   "peerDependencies": {
-    "restify": "3.x || 4.x",
-    "restify-errors": "^3.1.0"
+    "restify": "3.x || 4.x || 5.x",
+    "restify-errors": "^4.3.0"
   },
   "engines": {
     "node": ">= 0.10.0"
