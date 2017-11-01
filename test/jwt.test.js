@@ -23,7 +23,7 @@ describe('failure tests', function () {
   });
   
   it('should not throw if options.publicKey', function() {
-      var publicKey = fs.readFileSync(`./test/test.key.pub`);
+      var publicKey = fs.readFileSync('./test/test.key.pub');
       restifyjwt({publicKey});
   });
 
