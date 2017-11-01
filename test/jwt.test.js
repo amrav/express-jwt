@@ -1,5 +1,6 @@
 var jwt = require('jsonwebtoken');
 var assert = require('assert');
+var fs = require('fs');
 
 var restifyjwt = require('../lib');
 var restify = require('restify');
@@ -7,14 +8,23 @@ var restify = require('restify');
 describe('failure tests', function () {
   var req = {};
   var res = {};
-
-  it('should throw if options not sent', function() {
-    try {
-      restifyjwt();
-    } catch(e) {
-      assert.ok(e);
-      assert.equal(e.message, 'secret should be set');
-    }
+  
+    it('should throw if options not sent', function() {
+      try {
+        restifyjwt();
+      } catch(e) {
+        assert.ok(e);
+        assert.equal(e.message, 'secret or publicKey should be set');
+      }
+  });
+  
+  it('should not throw if options.secret', function() {
+      restifyjwt({secret: 'secret'});
+  });
+  
+  it('should not throw if options.publicKey', function() {
+      var publicKey = fs.readFileSync('./test/test.key.pub');
+      restifyjwt({publicKey});
   });
 
   it('should throw if no authorization header and credentials are required', function() {

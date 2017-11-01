@@ -60,14 +60,14 @@ This module also support tokens signed with public/private key pairs. Instead of
 
 ```javascript
 var publicKey = fs.readFileSync('/pat/to/public.pub');
-jwt({ secret: publicKey });
+jwt({ publicKey: publicKey });
 ```
 
 By default, the decoded token is attached to `req.user` but can be configured with the `requestProperty` option.
 
 
 ```javascript
-jwt({ secret: publicKey, requestProperty: 'auth' });
+jwt({ publicKey: publicKey, requestProperty: 'auth' });
 ```
 
 A custom function for extracting the token from a request can be specified with
